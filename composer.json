@@ -1,0 +1,23 @@
+{
+    "name": "imseyed/auth2fa",
+    "description": "PHP library provides functionality for generating Time-based One Time Passwords (TOTP) and HMAC-based One Time Passwords (HOTP), commonly used in two-factor authentication (2FA) systems.",
+    "keywords": ["Authentication", "Two-factor authentication", "2FA", "TOTP", "HOTP"],
+    "homepage": "https://github.com/imseyed/Auth2FA",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Imseyed\\Auth2fa\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ali khalili",
+            "email": "dev@alikhalili.ir",
+            "homepage": "https://github.com/imseyed"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    }
+}

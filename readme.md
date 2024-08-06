@@ -14,9 +14,9 @@ This PHP library provides functionality for generating Time-based One Time Passw
 ### TOTP Generation
 
 The `Auth2FA::TOTP` method generates a **Time-based One Time Password** using the provided secret key and optional time slice.
-[totp.example.php](totp.example.php)
+[totp.example.php](examples/totp.example.php)
 ```php
-$totp = imseyed\Auth2FA::TOTP($secret, $timeSlice);
+$totp = Auth2FA::TOTP($secret, $timeSlice);
 /*
  $totp is a OPT code like: 458905
 */
@@ -24,7 +24,7 @@ $totp = imseyed\Auth2FA::TOTP($secret, $timeSlice);
 
 If you want show expiration time of TOTP code must use `Auth2FA::expire_time`. that method return a number Unix timestamp.
 ```php
-$expirationTime = imseyed\Auth2FA::expire_time($timeSlice);
+$expirationTime = Auth2FA::expire_time($timeSlice);
 echo "Expire on ".date("H:i:s", $expirationTime)." (".($expirationTime - time())."s remind)";
 /*
  $expirationTime is a unix timestamp like: 1722929683
@@ -34,9 +34,9 @@ echo "Expire on ".date("H:i:s", $expirationTime)." (".($expirationTime - time())
 ### HOTP Generation
 
 The `Auth2FA::HOTP` method generates an **HMAC-based One Time Password** using the provided secret key and counter value.
-[hotp.example.php](hotp.example.php)
+[hotp.example.php](examples/hotp.example.php)
 ```php
-$code = imseyed\Auth2FA::HOTP($secret, $counter);
+$code = Auth2FA::HOTP($secret, $counter);
 /*
  $code is string like: 111222
 */
