@@ -1,5 +1,5 @@
 <?php
-namespace imseyed\Auth2FA;
+namespace imseyed;
 
 class Auth2FA{
 	/**

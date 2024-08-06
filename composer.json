@@ -7,7 +7,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Imseyed\\Auth2fa\\": "src/"
+            "imseyed\\": "src/"
         }
     },
     "authors": [
