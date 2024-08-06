@@ -1,16 +1,13 @@
 <?php
 require "Auth2FA.php";
 
-//$secret = Auth2FA::generateSecret();
+//$secret = Auth2FA::generate_secret();
 // OR
 $secret = 'OVZ7 JFIP IXE4 RTCE GCQE G2JN UY2Q PVD6'; // Replace your secret code
 
-$totp = Auth2FA::TOTP($secret, 30);
-/*
- $totp is array like: ['code'=>111222, 'expire'=>1712003400];
-*/
-list($otpCode, $expirationTime) = array_values($totp);
+$totp = imseyed\Auth2FA::TOTP($secret, 30);
+$expirationTime = imseyed\Auth2FA::expire_time(30);
 
 
-echo "Code: $otpCode".PHP_EOL;
+echo "Code: $totp".PHP_EOL;
 echo "Expire on ".date("H:i:s", $expirationTime)." (".($expirationTime - time())."s remind)".PHP_EOL;

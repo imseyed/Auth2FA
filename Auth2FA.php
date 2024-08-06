@@ -1,14 +1,14 @@
 <?php
+namespace imseyed;
 
 class Auth2FA{
 	/**
-	 * Generate Time-based One Time Password
 	 * @param $secret
-	 * @param $timeSlice
+	 * @param int $timeSlice
 	 *
-	 * @return array [code=> (OTP code) ,expire=> (Unix timestamp)]
+	 * @return string
 	 */
-	static function TOTP($secret, $timeSlice=30): array
+	static function TOTP($secret, int $timeSlice=30): string
 	{
 		$secret = self::base32_decode($secret);
 		$timeSliceBasedValue=floor(time()/$timeSlice);
@@ -21,10 +21,21 @@ class Auth2FA{
 			        ((ord($hash[$offset+2])&0xff)<<8)|
 			        (ord($hash[$offset+3])&0xff)
 		        )%1000000;
-		
-		$expirationTime=($timeSliceBasedValue+1)*$timeSlice;
-		$otpCode = str_pad($otp, 6, '0', STR_PAD_LEFT);
-		return ['code'=>$otpCode, 'expire'=>$expirationTime];
+		return str_pad($otp, 6, '0', STR_PAD_LEFT);
+	}
+	
+	/**
+	 * Return expire time of current TOTP code
+	 *
+	 * @param $secret
+	 * @param int $timeSlice
+	 *
+	 * @return int
+	 */
+	static function expire_time(int $timeSlice=30): int
+	{
+		$timeSliceBasedValue=floor(time()/$timeSlice);
+		return ($timeSliceBasedValue+1)*$timeSlice;
 	}
 	
 	/**
@@ -53,11 +64,11 @@ class Auth2FA{
 	/**
 	 * Generate random secret key
 	 *
-	 * @param $length
+	 * @param int $length
 	 *
 	 * @return string secret key
 	 */
-	public static function generateSecret($length = 32): string
+	public static function generate_secret(int $length = 32): string
 	{
 		$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 		$secret = '';
@@ -75,7 +86,7 @@ class Auth2FA{
 	 *
 	 * @return string Returns the decoded string.
 	 */
-	static function base32_decode($str): string
+	static function base32_decode(string $str): string
 	{
 		$str = strtoupper($str);
 		$str       =str_replace(' ', '', $str);
